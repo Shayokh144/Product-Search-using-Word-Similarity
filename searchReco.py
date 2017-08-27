@@ -65,15 +65,20 @@ using sequence matcher
 import difflib
 
 for query in queryList:
-    a=query
+    
     for product in productList:
-        b=product
-        seq = difflib.SequenceMatcher(None,a,b)
+        
+        seq = difflib.SequenceMatcher(None,query,product)
         d = seq.ratio()*100
         print("SM   ",query,'   ',product,'    ',d)
 
 
+a = 'আমি'
+b = 'আম'
 
+seq = difflib.SequenceMatcher(None,a,b)
+d = seq.ratio()*100
+print(d)
 
 
 
