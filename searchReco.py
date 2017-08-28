@@ -17,7 +17,7 @@ using cosine distance
 '''
 from scipy import spatial
 import operator
-
+import nltk
 charDct={}
 cnt=0
 for char in letters:
@@ -43,11 +43,13 @@ for query in queryList:
             vpl[charDct[c]]+=1
         result = 1 - spatial.distance.cosine(vpl, vql)
         recoDct.update({item:result})
+        
         #print(query,"  ",item,"  ",result)
         vpl=[0]*37
     sorted_lst=sorted(recoDct.items(), key=operator.itemgetter(1),reverse=True)
     for i,j in sorted_lst:
         print(i,"=",j)
+        print('Levenshtein distance=',nltk.edit_distance(i, query))
  
     #print(sorted_lst)
         
@@ -71,10 +73,11 @@ for query in queryList:
         seq = difflib.SequenceMatcher(None,query,product)
         d = seq.ratio()*100
         print("SM   ",query,'   ',product,'    ',d)
+        
 
 
 a = 'আমি'
-b = 'আম'
+b = 'আমার'
 
 seq = difflib.SequenceMatcher(None,a,b)
 d = seq.ratio()*100
